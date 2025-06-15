@@ -109,6 +109,8 @@ jobs:
         path: .github/actions/prepare-node-test-matrix-action
         sparse-checkout: .github/actions/prepare-node-test-matrix-action
         persist-credentials: false
+    
+    - run: ls -a .github/actions/prepare-node-test-matrix-action
 
     - name: Prepare the matrix
       uses: ./.github/actions/prepare-node-test-matrix-action

@@ -106,11 +106,12 @@ jobs:
       with:
         repository: ${{ inputs.action-repository }}
         ref: ${{ inputs.action-ref }}
-        path: infra-actions
+        path: .github/actions/prepare-node-test-matrix-action
+        sparse-checkout: .github/actions/prepare-node-test-matrix-action
         persist-credentials: false
 
     - name: Prepare the matrix
-      uses: ./infra-actions/.github/actions/prepare-node-test-matrix-action
+      uses: ./.github/actions/prepare-node-test-matrix-action
       id: set-matrix
       with:
         upgrade-policy: ${{ inputs.upgrade-policy }}
@@ -148,26 +149,27 @@ jobs:
       with:
         repository: ${{ inputs.action-repository }}
         ref: ${{ inputs.action-ref }}
-        path: infra-actions
+        path: .github/actions/prepare-dynamic-steps
+        sparse-checkout: .github/actions/prepare-dynamic-steps
         persist-credentials: false
 
     - name: Prepare post-checkout steps
       if: ${{ inputs.post-checkout-steps }}
-      uses: ./infra-actions/.github/actions/prepare-dynamic-steps
+      uses: ./.github/actions/prepare-dynamic-steps
       with:
         steps: ${{ inputs.post-checkout-steps }}
         path: post-checkout-steps
 
     - name: Prepare post-install steps
       if: ${{ inputs.post-install-steps }}
-      uses: ./infra-actions/.github/actions/prepare-dynamic-steps
+      uses: ./.github/actions/prepare-dynamic-steps
       with:
         steps: ${{ inputs.post-install-steps }}
         path: post-install-steps
 
     - name: Prepare post-test steps
       if: ${{ inputs.post-test-steps }}
-      uses: ./infra-actions/.github/actions/prepare-dynamic-steps
+      uses: ./.github/actions/prepare-dynamic-steps
       with:
         steps: ${{ inputs.post-test-steps }}
         path: post-test-steps
